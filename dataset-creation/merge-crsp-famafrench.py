@@ -6,7 +6,7 @@ then for each month group by each stock based on PERMNO and CUSIP
 Output: Pickle files for each stock in a month
 Execution Comment:
     - before running this code, run the following scripts to prepare the required pre-processed data for this script:
-        preprocess/daily_ff3_data_split.py
+        dataset-creation/datasplit-daily-crsp-famafrench.py
 '''
 import os
 import pandas as pd
