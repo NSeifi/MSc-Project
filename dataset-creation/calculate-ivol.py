@@ -20,7 +20,7 @@ dir_name = "CRSP_FFRENCH_DAILY_GROUPED/"
 # res_cnt = 0
 # filter trading days>15 and compute the IVOL
 with open("IVOL_complete.csv", "w") as ivol_file:
-    ivol_file.write("PERMNO, CUSIP, year, month, IVOL\n")
+    ivol_file.write("PERMNO, CUSIP, year, month, IVOL,residuals\n")
     for file_name in tqdm(os.listdir(dir_name)):
         FFC = pd.read_pickle(dir_name+file_name)
         if len(FFC) < 15:
@@ -40,4 +40,4 @@ with open("IVOL_complete.csv", "w") as ivol_file:
         # reseduals.sum() should be close to zero!
         IVOL = np.std(np.array(residuals)) * np.sqrt(len(FFC))
         ikeys = file_name.split("_")
-        ivol_file.write("{},{},{},{},{}\n".format(ikeys[0], ikeys[1], ikeys[2].split("-")[0], ikeys[2].split("-")[1], IVOL))
+        ivol_file.write("{},{},{},{},{},{}\n".format(ikeys[0], ikeys[1], ikeys[2].split("-")[0], ikeys[2].split("-")[1], IVOL,residuals))
