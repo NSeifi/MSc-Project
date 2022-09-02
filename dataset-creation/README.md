@@ -7,6 +7,5 @@ calculate-ivol.py
 split-ivol.py
 
 create-nasdaq100-dataset.py
-create-lagged-nasdaq100-dataset.py
 
-feature-extractors.py
+create-lagged-nasdaq100-dataset.py
