@@ -10,11 +10,14 @@ https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html
 
 Then follow the steps to process the data:
 
-Preprocess/daily_ff3_data_split.py
+datasplit-daily-crsp-famafrench.py
 
-Preprocess/create_crsp_ffrench_daily_grouped_version2.py
+merge-crsp-famafrench.py
 
-Preprocess/create_ivol.py
+calculate-ivol.py
 
-Preprocess/ivol_split.py
+split-ivol.py
 
+create-nasdaq100-dataset.py
+
+create-lagged-nasdaq100-dataset.py
