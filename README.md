@@ -10,14 +10,14 @@ https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html
 
 Then follow the steps to process the data:
 
-datasplit-daily-crsp-famafrench.py
+dataset-creation/datasplit-daily-crsp-famafrench.py
 
-merge-crsp-famafrench.py
+dataset-creation/merge-crsp-famafrench.py
 
-calculate-ivol.py
+dataset-creation/calculate-ivol.py
 
-split-ivol.py
+dataset-creation/split-ivol.py
 
-create-nasdaq100-dataset.py
+dataset-creation/create-nasdaq100-dataset.py
 
-create-lagged-nasdaq100-dataset.py
+dataset-creation/create-lagged-nasdaq100-dataset.py
