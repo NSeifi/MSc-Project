@@ -7,7 +7,7 @@ Output: csv files for each stock ticker with lagged IVOL values
 
 Execution Comment:
     - before running this code, run the following scripts to prepare the required pre-processed data for this script:
-        dataset-creation/create-nasdaq-100-dataset.py
+        dataset-creation/create-nasdaq100-dataset.py
 """
 import os
 from tqdm import tqdm
