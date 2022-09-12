@@ -40,4 +40,5 @@ with open("IVOL_complete.csv", "w") as ivol_file:
         # reseduals.sum() should be close to zero!
         IVOL = np.std(np.array(residuals)) * np.sqrt(len(FFC))
         ikeys = file_name.split("_")
-        ivol_file.write("{},{},{},{},{},{}\n".format(ikeys[0], ikeys[1], ikeys[2].split("-")[0], ikeys[2].split("-")[1], IVOL,residuals))
+        res = "|".join([str(x) for x in residuals.tolist()])
+        ivol_file.write("{},{},{},{},{},{}\n".format(ikeys[0], ikeys[1], ikeys[2].split("-")[0], ikeys[2].split("-")[1], IVOL,res))

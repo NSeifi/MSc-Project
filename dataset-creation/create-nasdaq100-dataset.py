@@ -39,7 +39,7 @@ if __name__ == '__main__':
     for year in tqdm(range(1968, 2020)):
         crsp_ffrench_ivol = read_and_merge(year)
 
-        N100_data = pd.read_csv("nasdaq_100.csv", delimiter='\t')
+        N100_data = pd.read_csv("nasdaq-100.csv", delimiter='\t')
         N100_data['FIRST DATE'] = pd.to_datetime(N100_data['FIRST DATE'], format='%Y%m%d')
         N100_data['LAST DATE'] = pd.to_datetime(N100_data['LAST DATE'], format='%Y%m%d')
         # N100_data['begin_year'] = N100_data['FIRST DATE'].dt.to_period('Y')
