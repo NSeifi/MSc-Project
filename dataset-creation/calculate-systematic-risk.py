@@ -6,7 +6,7 @@ Output: a csv file for monthly IVOL (IVOL_complete.csv)
 
 Execution Comment:
     - before running this code, run the following scripts to prepare the required pre-processed data for this script:
-        preprocess/create_crsp_ffrench_daily_grouped_version2.py
+        preprocess/merge-crsp-famafrench.py
 '''
 import os
 import pandas  as pd
