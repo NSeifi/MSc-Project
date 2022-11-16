@@ -23,3 +23,9 @@ dataset-creation/create-nasdaq100-dataset.py
 dataset-creation/create-lagged-nasdaq100-dataset.py
 
 feature-extractors.py
+
+decision-tree-experiments.py
+
+lstm-experiments.py
+
+lstm-monthly-experiments.py
