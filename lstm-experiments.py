@@ -221,3 +221,9 @@ if __name__ == '__main__':
     print(f"Average error_rate: {sum([x[1] for x in all_error_rates])/len(all_error_rates):.3f}")
     print(f"Best error_rate: {[sorted(all_error_rates, key=lambda x: x[1])[0]][0]}")
     print(f"Worst error_rate: {[sorted(all_error_rates, key=lambda x: x[1], reverse=True)[0]][0]}")
+    
+#2,3 years
+#['DDOG','KDP','CRWD','ZS','CEG','ZM','PDD','DOCU','AVGO','MRNA','CEG','BKNG','OKTA']
+
+#2018
+#['DDOG','KDP','CRWD','ZS','CEG','ZM','PDD','DOCU','AVGO','MRNA']
