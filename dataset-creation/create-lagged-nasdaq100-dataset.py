@@ -28,11 +28,11 @@ if __name__ == '__main__':
             if not trade_record:
                 continue
             trade_r = trade_record.split(",")
-            ivol = trade_r[-1]
-            year_month = trade_r[-4]
+            ivol = trade_r[-2]
+            year_month = trade_r[-5]
             if year_month != current_year_month and previous_month:
                 for r in previous_month:
-                    r[-1] = ivol
+                    r[-2] = ivol
                     result_ticker_file.write(",".join(r) + "\n")
                 del previous_month[:]
             previous_month.append(trade_r)

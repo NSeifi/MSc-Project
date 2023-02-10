@@ -12,8 +12,8 @@ dtype = {'SHRCD': float, 'EXCHCD': float, 'SICCD': float, 'ISSUNO': float, 'HEXC
          'RETX': float, 'vwretd': float, 'vwretx': float, 'ewretd': float, 'ewretx': float, 'sprtrn': float,
          'Mkt-RF': float, 'SMB': float, 'HML': float, 'RF': float, 'IVOL': float}
 
-filename = "preprocess/company_preprocessed_csv/{}.csv"
-#filename = "preprocess/lagged_company_preprocessed_csv/{}.csv"
+filename = "company_preprocessed_csv/{}.csv"
+# filename = "lagged_company_preprocessed_csv/{}.csv"
 
 ticker = ['MSFT', 'SIRI', 'OKTA', 'GOOG', 'ALGN', 'REGN', 'CHTR', 'NVDA', 'NFLX', 'ILMN', 'IDXX', 'NTES', 'VRTX']
 for ticker in ticker:
@@ -26,7 +26,7 @@ for ticker in ticker:
     x1 = np.zeros(1)
     x2 = np.zeros(1)
     y = np.zeros(1)
-    for year_index, year in enumerate([2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,2018, 2019]):
+    for year_index, year in enumerate([2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]):
         ret = traindata[traindata['year'] == year].groupby(['year', 'month']).mean()
         x1 = np.append(x1, ret.to_numpy()[:, 0].tolist())
         x2 = np.append(x2, ret.to_numpy()[:, 1].tolist())

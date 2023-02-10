@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 pd.options.mode.chained_assignment = None
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-best_feature_set_file = "preprocess/best_feature_set.csv"
+best_feature_set_file = "best-feature-set.csv"
 ticker_file_name_format = "company_preprocessed_csv/{}.csv"
 
 
@@ -104,7 +104,7 @@ def train(traindata, testdata, experiment_features, target_label, epochs=50, lr=
     p = Predictor(len(experiment_features), 32, len(target_label), 1).to(device)
     # Stochastic Gradient Descent optimizer
     if optimizer_name == "adadelta":
-        optimizer = torch.optim.Adadelta(p.parameters(), lr=lr, rho=0.9, eps=1e-06, weight_decay=0.01)
+        optimizer = torch.optim.Adadelta(p.parameters(), lr=lr, rho=0.95, eps=1e-06, weight_decay=0.01)
     elif optimizer_name == "rmsprop":
         optimizer = torch.optim.RMSprop(p.parameters(), lr=lr, alpha=0.99, eps=1e-08, weight_decay=0,
                                         momentum=learning_momentum, centered=False)
@@ -188,14 +188,14 @@ def prepare_data(ticker='AAPL', number_of_history_years=0, verbose=True):
     assert 0 <= number_of_history_years <=10
 
     if number_of_history_years == 0:
-        traindata = data[data['year'] <= 2018]
+        traindata = data[data['year'] <= 2021]
     else:
-        traindata = data[data['year'] <= 2018]
-        traindata = traindata[traindata['year'] > (2018 - number_of_history_years)]
+        traindata = data[data['year'] <= 2021]
+        traindata = traindata[traindata['year'] > (2021 - number_of_history_years)]
 
-    testdata = data[data['year'] >= 2019]
+    testdata = data[data['year'] >= 2022]
 
-    if not len(data[data['year'] < 2018]):
+    if not len(data[data['year'] < 2021]):
         traindata = data
         testdata = data
 
@@ -211,10 +211,10 @@ if __name__ == '__main__':
     all_error_rates = []
     verbose = False
     for ticker in tqdm(all_tickers):
-        if ticker == 'CEG':
+        if ticker in ['CEG', 'TEAM']:
             continue
         train_data, test_data, e_features, t_label = prepare_data(ticker, num_of_history_years, verbose=verbose)
-        error_rate, best_epoch = train(train_data, test_data, e_features, t_label, epochs=50, lr=0.003,
+        error_rate, best_epoch = train(train_data, test_data, e_features, t_label, epochs=50, lr=0.05,
                                        learning_momentum=0.9, max_grad_norm=1.0, cumulate_loss=16,
                                        optimizer_name="adadelta", verbose=verbose)
         all_error_rates.append((ticker, error_rate, best_epoch))
@@ -222,8 +222,12 @@ if __name__ == '__main__':
     print(f"Best error_rate: {[sorted(all_error_rates, key=lambda x: x[1])[0]][0]}")
     print(f"Worst error_rate: {[sorted(all_error_rates, key=lambda x: x[1], reverse=True)[0]][0]}")
     
-#2,3 years
-#['DDOG','KDP','CRWD','ZS','CEG','ZM','PDD','DOCU','AVGO','MRNA','CEG','BKNG','OKTA']
+# 2,3 years in 2019 experiment
+# ['DDOG','KDP','CRWD','ZS','CEG','ZM','PDD','DOCU','AVGO','MRNA','CEG','BKNG','OKTA']
 
-#2018
-#['DDOG','KDP','CRWD','ZS','CEG','ZM','PDD','DOCU','AVGO','MRNA']
+# 2018 in 2019 experiment
+# ['DDOG','KDP','CRWD','ZS','CEG','ZM','PDD','DOCU','AVGO','MRNA']
+
+# for 2 years: ,'ABNB' , 'LCID' in 2022 experiment
+# for 3 years: ,'DDOG'
+# all time : 'CEG', 'TEAM'

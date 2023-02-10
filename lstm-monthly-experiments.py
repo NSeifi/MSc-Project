@@ -5,8 +5,8 @@ from tqdm import tqdm
 
 pd.options.mode.chained_assignment = None
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-best_feature_set_file = "preprocess/best_feature_set.csv"
-ticker_file_name_format = "preprocess/company_preprocessed_csv/{}.csv"
+best_feature_set_file = "best-feature-set.csv"
+ticker_file_name_format = "lagged_company_preprocessed_csv/{}.csv"
 
 
 class MonthlyPredictor(nn.Module):
@@ -229,13 +229,23 @@ if __name__ == '__main__':
     all_error_rates = []
     verbose = False
     for ticker in tqdm(all_tickers):
-        if ticker == 'CEG':
+        if ticker in ['CEG', 'TEAM']:
             continue
         train_data, test_data, e_features, t_label = prepare_data(ticker, num_of_history_years, verbose=verbose)
-        error_rate, best_epoch = train(train_data, test_data, e_features, t_label, epochs=50, lr=0.003,
+        error_rate, best_epoch = train(train_data, test_data, e_features, t_label, epochs=50, lr=0.025,
                                        learning_momentum=0.9, max_grad_norm=1.0, cumulate_loss=16,
-                                       optimizer_name="adadelta", verbose=verbose)
+                                       optimizer_name="RMSPROP", verbose=verbose)
         all_error_rates.append((ticker, error_rate, best_epoch))
     print(f"Average error_rate: {sum([x[1] for x in all_error_rates])/len(all_error_rates):.3f}")
     print(f"Best error_rate: {[sorted(all_error_rates, key=lambda x: x[1])[0]][0]}")
     print(f"Worst error_rate: {[sorted(all_error_rates, key=lambda x: x[1], reverse=True)[0]][0]}")
+
+# 2,3 years in 2019 experiment
+# ['DDOG','KDP','CRWD','ZS','CEG','ZM','PDD','DOCU','AVGO','MRNA','CEG','BKNG','OKTA']
+
+# 2018 in 2019 experiment
+# ['DDOG','KDP','CRWD','ZS','CEG','ZM','PDD','DOCU','AVGO','MRNA']
+
+# for 2 years: ,'ABNB' , 'LCID' in 2022 experiment
+# for 3 years: ,'DDOG'
+# all time : 'CEG', 'TEAM'

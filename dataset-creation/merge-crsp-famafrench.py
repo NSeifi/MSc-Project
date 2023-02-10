@@ -18,7 +18,7 @@ from tqdm import tqdm
 # Daily CRSP and Fama-French Merge
 ########################################################################################################
 os.mkdir("CRSP_FFRENCH_DAILY_GROUPED/")
-for year in tqdm(range(1963, 2020)):
+for year in tqdm(range(1963, 2023)):
     # crsp_d = pd.read_csv('CRSP-DAILY-BY-YEAR/{}.csv'.format(year),
     #                     usecols=['PERMNO', 'date', 'SHRCD', 'NCUSIP', 'TICKER', 'PERMCO',
     #                              'CUSIP', 'BIDLO', 'ASKHI', 'PRC', 'VOL', 'RET', 'BID', 'ASK',

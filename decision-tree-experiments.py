@@ -1,4 +1,4 @@
-from preprocess.feature_extractors import *
+from feature_extractors import *
 from lstm_experiments import inline_normalize, prepare_data
 
 functions = {
@@ -24,7 +24,7 @@ models = {
     'gradient_boosting_regressor': train_gradient_boosting_regressor
 }
 
-best_feature_set_file = "preprocess/best_feature_set.csv"
+best_feature_set_file = "best-feature-set.csv"
 ticker_file_name_format = "company_preprocessed_csv/{}.csv"
 
 
@@ -48,7 +48,7 @@ def run_experiment(trainer, ticker='AAPL', number_of_history_years=0, verbose=Tr
 
 if __name__ == '__main__':
     data = pd.read_csv(best_feature_set_file)
-    num_of_history_years = 1
+    num_of_history_years = 0
     all_error_rates = []
     # Possible Options:
     #           'decision_tree_regressor'
@@ -59,10 +59,11 @@ if __name__ == '__main__':
 
     for index, row in tqdm(data.iterrows()):
         ticker = row['Ticker']
-        if ticker == 'CEG':
+        if ticker in ['CEG', 'TEAM']:
             continue
         f_selector_name = row[' FeatureSelector'].strip()
-        best_tree = row[' BaselineModel'].strip()
+        # best_tree = row[' BaselineModel'].strip()
+        best_tree = 'decision_tree_regressor'
         assert best_tree in models, best_tree
         if overwrite_model_name is not None:
             best_tree = overwrite_model_name
@@ -71,3 +72,6 @@ if __name__ == '__main__':
     print(f"Average error_rate: {sum([x[1] for x in all_error_rates])/len(all_error_rates):.3f}")
     print(f"Best error_rate: {sorted(all_error_rates, key=lambda x: x[1])[0]}")
     print(f"Worst error_rate: {sorted(all_error_rates, key=lambda x: x[1], reverse=True)[0]}")
+# for 2 years: ,'ABNB' , 'LCID'
+# for 3 years: ,'DDOG'
+# all time : 'CEG', 'TEAM'

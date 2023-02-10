@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
     result = dict()
 
-    for year in tqdm(range(1968, 2020)):
+    for year in tqdm(range(1968, 2023)):
         crsp_ffrench_ivol = read_and_merge(year)
 
         N100_data = pd.read_csv("nasdaq-100.csv", delimiter='\t')

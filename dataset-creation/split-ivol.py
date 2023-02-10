@@ -27,12 +27,12 @@ for line in tqdm(f):
     PERMNO = l['PERMNO']
     CUSIP = l['CUSIP']
     IVOL = l['IVOL'].strip()
-    residuals = l['residuals'].strip()
+    # residuals = l['residuals'].strip()
     year_month = year + "-" + month
     if year not in year_files:
         year_files[year] = open(res_folder_name.format(year), "w", encoding="utf-8")
-        year_files[year].write("PERMNO,CUSIP,year,month,year_month,IVOL,residuals\n")
-    year_files[year].write("{},{},{},{},{},{},{}\n".format(PERMNO, CUSIP, year, month, year_month, IVOL, residuals))
+        year_files[year].write("PERMNO,CUSIP,year,month,year_month,IVOL\n")
+    year_files[year].write("{},{},{},{},{},{}\n".format(PERMNO, CUSIP, year, month, year_month, IVOL))
 f.close()
 for k in year_files:
     year_files[k].close()
